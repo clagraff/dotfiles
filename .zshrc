@@ -174,6 +174,46 @@ export VISUAL=vim
 export EDITOR="$VISUAL"
 export CERT="delve-cert"
 
+function initialize {
+    clear
+
+    # Startup required applications
+    elasticsearch &
+    ~/Downloads/rabbitmq_server-3.5.3/sbin/rabbitmq-server &
+    redis-server &
+
+    sleep 5
+
+    # Run CM scripts
+    workon channel-manager
+    cdv && cd channel-manager/scripts
+    python export_worker.py &
+    python image_worker.py &
+
+    # Initialize AmberAPI
+    workon amber-api
+    cdv && cd amber-api
+    python app.py runserver -p 8001 &
+
+    # Initiailize Channel-Manager
+    workon channel-manager
+    cdv && cd channel-manager
+    python app.py runserver -p 8002 &
+    gulp && gulp watch &
+
+    # Initialize Amber-Discover
+    workon amber-discover
+    cdv && cd amber-discover
+    python app.py runserver -p 8003 &
+    gulp && gulp watch &
+
+    # Initialize AmberEngine
+    workon amberenginecom
+    cdv && cd AmberEngine.com
+    python app.py &
+    gulp && gulp watch &
+}
+
 fancy-ctrl-z () {
   if [[ $#BUFFER -eq 0 ]]; then
     BUFFER="fg"
@@ -193,7 +233,7 @@ source /usr/local/bin/virtualenvwrapper.sh
 alias vim=nvim
 
 # Add local python to path
-export PATH=$PATH:/Users/$USER/Library/Python/2.7/bin
+export PATH=$PATH:/Users/clagraff/Library/Python/2.7/bin
 export PATH=$PATH:/usr/local/Cellar
 
 # Docker shit

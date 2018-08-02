@@ -52,6 +52,7 @@ autocmd BufRead,BufNewFile *.html :setlocal sw=2 ts=2 sts=2
 autocmd BufRead,BufNewFile *.jinja2 :setlocal sw=2 ts=2 sts=2 ft=html
 autocmd BufRead,BufNewFile *.hbs :setlocal sw=2 ts=2 sts=2 ft=html
 autocmd BufRead,BufNewFile *.json :setlocal ft=javascript
+autocmd BufRead,BufNewFile *.apib :setlocal ft=markdown
 autocmd BufWritePre,BufNewFile *.go :GoImports
 autocmd FileType yaml :setlocal ts=2 sts=2 sw=2 expandtab
 autocmd filetype coffee :setlocal sw=2 ts=2 sts=2
