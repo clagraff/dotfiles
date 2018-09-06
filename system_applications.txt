@@ -1,0 +1,105 @@
+> ls /Applications
+Android File Transfer.app
+Angband.app
+App Store.app
+Audacity.app
+Automator.app
+Background Music.app
+Battle.net.app
+Bitwarden.app
+Calculator.app
+Calendar.app
+Chess.app
+Citra
+Citrix Receiver.app
+Contacts.app
+DVD Player.app
+Dashboard.app
+Defold.app
+Dia.app
+Dictionary.app
+Disk Inventory X.app
+Docker.app
+EncryptMe.app
+FaceTime.app
+Firefox.app
+Flux.app
+Font Book.app
+GIMP.app
+GIPHY CAPTURE.app
+GOG Galaxy.app
+GarageBand.app
+Godot.app
+Google Chrome.app
+Heroes of the Storm
+Image Capture.app
+Install macOS High Sierra.app
+JavaFX Scene Builder 1.1.app
+JavaFX Scene Builder 2.0.app
+Keynote.app
+Kicad
+Kitematic (Beta).app
+Launchpad.app
+LibreOffice.app
+Lightworks.app
+Macnewbie
+Mail.app
+Maps.app
+MarkRight.app
+Messages.app
+Mission Control.app
+MuseScore 2.app
+NetBeans
+Notes.app
+OBS.app
+OpenRA - Dune 2000.app
+OpenRA - Red Alert.app
+OpenRA - Tiberian Dawn.app
+OpenRCT2.app
+OpenShot Video Editor.app
+Pencil.app
+Photo Booth.app
+PhotoScapeX.app
+Photos.app
+Pinta.app
+Postgres.app
+Preview.app
+QuickTime Player.app
+Reminders.app
+Safari.app
+Screenhero.app
+Scribus.app
+Siri.app
+Skitch.app
+Skype.app
+Slack.app
+Space Colony HD.app
+Spectacle.app
+Steam.app
+Stickies.app
+Stronghold Crusader HD.app
+Stronghold HD.app
+SyphonInject.app
+System Preferences.app
+TeamViewer.app
+TextEdit.app
+The Unarchiver.app
+Time Machine.app
+TunnelBear.app
+Utilities
+VLC.app
+VirtualBox.app
+VirtualBox.pkg
+Visual Studio.app
+Wansview.app
+Xamarin Profiler.app
+Xamarin Workbooks.app
+Zotero.app
+draw.io.app
+iBooks.app
+iMovie.app
+iTerm.app
+iTunes.app
+krita.app
+qbittorrent.app
+zoom.us.app

@@ -1,0 +1,18 @@
+> ls ~/Applications
+Chrome Apps.localized
+Cities Skylines.app
+Darkwood.app
+ImageOptim.app
+Mad Games Tycoon.app
+Plague Inc Evolved.app
+Poly Bridge.app
+STAR WARS Knights of the Old Republic.app
+Salt and Sanctuary.app
+Satellite Reign.app
+Slime Rancher.app
+Stardew Valley.app
+Subnautica.app
+The Stanley Parable Demo.app
+Wasteland 1 - The Original Classic.app
+Wasteland 2.app
+XCOM Enemy Unknown.app
