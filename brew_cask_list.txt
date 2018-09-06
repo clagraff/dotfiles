@@ -1,0 +1,7 @@
+> brew cask list
+imageoptim
+java8
+markright
+minikube
+steamcmd
+xquartz
