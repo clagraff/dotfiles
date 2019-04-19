@@ -19,9 +19,17 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 " Specify a directory for plugins
 " " - For Neovim: ~/.local/share/nvim/plugged
 " " - Avoid using standard Vim directory names like 'plugin'
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
 
-    Plug 'Shougo/deoplete.nvim'             " Async auto completion for Neovim or Vim8
+    if has('nvim')
+      Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    else
+      Plug 'Shougo/deoplete.nvim'
+      Plug 'roxma/nvim-yarp'
+      Plug 'roxma/vim-hug-neovim-rpc'
+    endif
+    let g:deoplete#enable_at_startup = 1
+
     Plug 'fatih/vim-go'                     " Enhanced golang support in vim
     Plug 'kchmck/vim-coffee-script'         " Enahcned Coffeescript support in vim
     Plug 'majutsushi/tagbar'                " Later mapped to <F8>
@@ -36,6 +44,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'jaxbot/semantic-highlight.vim'    " Semantic Highlighting
     Plug 'tpope/vim-ragtag'
     Plug 'digitaltoad/vim-pug'              " Syntax highlighting for .jade files
+    Plug 'szorfein/fromthehell.vim'
 
 call plug#end()  " Initialize plugin system
 
@@ -128,7 +137,7 @@ endif
     
 
     " ------------------==== Display Options ====------------------
-     colorscheme gruvbox " Select (installed) color scheme
+    colorscheme fromthehell " Select (installed) color scheme
     set background=dark     " Select background mode ("dark" or "light")
     set cursorline          " Highlight current line
     set foldcolumn=1        " Add a bit of extra margin to the left.
@@ -399,8 +408,8 @@ nnoremap <C-e> :SyntasticToggleMode<CR>
 
 
 " Configure python3 path
-" let g:python_host_prog = '/usr/local/bin/python'
-let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python_host_prog = '/usr/bin/python'
+let g:python3_host_prog = '/usr/bin/python3'
 
 " Enable deoplete
 let g:deoplete#enable_at_startup = 1
@@ -418,7 +427,17 @@ let g:go_term_enabled = 1
 let g:go_fmt_autosave = 0
 let g:go_fmt_fail_silently = 0
 let g:go_fmt_command = "goimports"
-
+let g:go_auto_type_info = 1
+" Enable additional highlighting for Go code
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_build_constraints = 1
+" go back/forth to Golang test
+nnoremap <C-j> :GoAlternate<CR> 
 
 " semantic highlighting
 let g:semanticTermColors = [28,1,2,3,4,5,6,7,25,9,10,34,12,13,14,15,16,125,124,19]

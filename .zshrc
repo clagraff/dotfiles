@@ -1,14 +1,11 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/clagraff/.oh-my-zsh
 
-# Fix virtualenv wrapper for python path
-export VIRTUALENVWRAPPER_PYTHON=$(which python3)
-
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="avit"
+ZSH_THEME="clean"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -55,7 +52,7 @@ plugins=(aws dircycle encode64 fabric jsontools npm sudo urltools vagrant zsh-au
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:.:/usr/local/sbin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
-source $ZSH/oh-my-zsh.sh
+#source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
@@ -86,7 +83,7 @@ export LANG=en_US.UTF-8
 
 # bind UP and DOWN arrow keys
 zmodload zsh/terminfo
-source $ZSH/plugins/history-substring-search/history-substring-search.zsh
+#source $ZSH/plugins/history-substring-search/history-substring-search.zsh
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 
@@ -108,44 +105,20 @@ bindkey '^[[B' history-substring-search-down
 
 # User Aliases
 alias please="sudo"
-alias dddown="docker-compose down"
-alias dupb="docker-compose up --build"
-alias dup="docker-compose up"
 alias ls="ls -lhAG"
-alias cls="clear && ls"
-alias h="history"
-alias j="jobs -l"
-alias venv="virtualenv --no-site-packages"
-alias root="sudo -i"
-alias c="clear"
-alias cdv="cdvirtualenv"
 
 alias fetch="git fetch -p"
 alias get="fetch && git checkout"
 alias pull="git pull origin"
 alias use="git checkout"
 
-alias lola="git log --graph --decorate --oneline"
-
-alias dowork="workon $1"
-
 alias ":q"="exit"
-alias vim="nvim"
-alias v="nvim"
-alias vi="nvim"
 
-alias args="python ~/args.py"
 alias fib="echo '0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144'"
-alias py="python"
-alias vf="vim \$(fzf)"
 
-alias fuckmongo="mongo api --eval \"db.getCollectionNames().forEach(function(c) { db[c].drop(); })\""
-alias kommit="curl -L -s http://whatthecommit.com/ | grep -A 1 \"\\\"c\" | tail -1 | sed 's/<p>//'"
 alias jsonlint='python -mjson.tool'
-alias weather='clear && curl wttr.in/48125'
+alias weather='curl wttr.in/48125'
 alias "?"="ag"
-
-alias ctags="`brew --prefix`/bin/ctags"
 
 # Git alias commands
 alias add="git add"
@@ -158,61 +131,14 @@ alias ipython="ipython --colors=Linux"
 
 alias cat=ccat
 
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/src
-
-export GOROOT=/usr/local/opt/go/libexec
-export GOPATH=$HOME/Go
+export GOROOT=$(which go)
+export GOPATH=$HOME/go
 
 export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
-
-export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-export PATH="~/.bin/gcc-arm-none-eabi-4_9-2015q3/bin:$PATH"
+export PATH=$PATH:$GOROOT
 
 export VISUAL=vim
 export EDITOR="$VISUAL"
-export CERT="delve-cert"
-
-function initialize {
-    clear
-
-    # Startup required applications
-    elasticsearch &
-    ~/Downloads/rabbitmq_server-3.5.3/sbin/rabbitmq-server &
-    redis-server &
-
-    sleep 5
-
-    # Run CM scripts
-    workon channel-manager
-    cdv && cd channel-manager/scripts
-    python export_worker.py &
-    python image_worker.py &
-
-    # Initialize AmberAPI
-    workon amber-api
-    cdv && cd amber-api
-    python app.py runserver -p 8001 &
-
-    # Initiailize Channel-Manager
-    workon channel-manager
-    cdv && cd channel-manager
-    python app.py runserver -p 8002 &
-    gulp && gulp watch &
-
-    # Initialize Amber-Discover
-    workon amber-discover
-    cdv && cd amber-discover
-    python app.py runserver -p 8003 &
-    gulp && gulp watch &
-
-    # Initialize AmberEngine
-    workon amberenginecom
-    cdv && cd AmberEngine.com
-    python app.py &
-    gulp && gulp watch &
-}
 
 fancy-ctrl-z () {
   if [[ $#BUFFER -eq 0 ]]; then
@@ -226,21 +152,6 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
-source /usr/local/bin/virtualenvwrapper.sh
-
-#source ~/.fabrc.zsh # For devops
-
-alias vim=nvim
-
-# Add local python to path
-export PATH=$PATH:/Users/clagraff/Library/Python/2.7/bin
-export PATH=$PATH:/usr/local/Cellar
-
-# Docker shit
-alias docker-compose-cycle='docker-compose stop && docker-compose rm -f && docker-compose build && docker-compose up -d'
-alias docker-image-clean='docker rmi $(docker images -q -f dangling=true)'
-alias docker-clean='docker rm $(docker ps -a -q)'
-alias docker-aws-login='$(aws ecr get-login --region us-east-2)'
 
 function spinner {
     local pid=$1
@@ -256,162 +167,13 @@ function spinner {
     printf "    \b\b\b\b"
 }
 
-# #
-# CUSTOM GOLANG COMMANDS
-# #
-function find_go_files {
-    find . -type f -name \*.go  -not -path "*vendor*" -not -path "*scripts*" -not -path "*git*" -not -path "*migrations*"
-}
-
-function find_go_pkgs {
-    find . -type d -not -path "*vendor*" -not -path "*scripts*" -not -path "*git*" -not -path "*migrations*"
-}
-
-function list_go_pkgs {
-    go list ./... | grep -v /vendor/ 
-}
-
-function gvet {
-temp_file=$(mktemp)
-	task_suffix=".... "
-	task_done="done!\n"
-	printf "Linting codebase....\n"
-
-    skip_build=0
-    if [[ $* == *--no-build* ]]; then
-        skip_build=1
-    fi
-
-    function gobuild_check {
-        if [[ $skip_build == 0 ]]; then
-            go build -race
-        fi
-    }
-
-    function govet_check {
-        go vet $( list_go_pkgs )
-    }
-
-    function misspell_check {
-        misspell $( find_go_files )
-    }
-    function deadcode_check {
-        deadcode $( find_go_pkgs )
-    }
-    function interfacer_check {
-        interfacer $( list_go_pkgs )
-    }
-    function gosimple_check {
-        gosimple $( list_go_pkgs )
-    }
-    function unused_check {
-        unused $( list_go_pkgs )
-    }
-    function golint_check {
-        for file in $( find_go_files ); do golint $file ; done
-    }
-
-    go_commands=(
-        "gobuild_check"
-
-        "deadcode_check"
-        "golint_check"
-        "gosimple_check"
-        "govet_check"
-        "interfacer_check"
-        "misspell_check"
-        "unused_check"
-    )
-
-    for cmd in ${go_commands[*]}; do
-        cmd_temp_file=$(mktemp)
-        printf "    $cmd$task_suffix"
-        $cmd > $cmd_temp_file 2>&1
-        printf "$task_done"
-        sed -i -e "s/^/$cmd::/" $cmd_temp_file
-        cat $cmd_temp_file >> $temp_file
-        rm $cmd_temp_file
-    done
-    
-    printf "Finished. Results stored in:  $temp_file\n"
-
-    if [[ $* == *--stdout* ]]; then
-        printf "\nPrinting results to Stdout\n\n"
-        cat "$temp_file"
-    fi
-}
-
-function gformat {
-    temp_file=$(mktemp)
-    gofmt -s -w -l $(find . -type f -name \*.go | grep -v /vendor/ )
-
-}
-
-
-
-function docker-change-branch () {
-    CONTAINER=$1
-
-    unset BRANCH
-
-    if [ $# -eq 2 ]
-    then
-        BRANCH=$2
-    fi
-
-    docker exec -it $CONTAINER pip3 install -e git+https://github.com/AmberEngine/amber-lib.git@${BRANCH:=master}#egg=amber-lib --src=/var/python/src --no-cache-dir;
-    docker commit $CONTAINER;
-    docker exec -it $CONTAINER supervisorctl restart app;
-}
-
-
-
-alias godocumentation=godoc --http :6060
-
-function docker-watch-api () {
-    docker logs -f --since 1s api.amberengine.dev | \
-        while read line ; do
-            echo "$line" | grep "Dungeon Master is ready to accept requests." > /dev/null
-            if [ $? = 0 ]
-            then
-                osascript -e 'display notification "API finished building" with title "API"'
-            fi
-        done
-}
-
-
 if [ -f ~/.config/exercism/exercism_completion.zsh ]; then
   . ~/.config/exercism/exercism_completion.zsh
 fi
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-# TAKES FOREVER TO LOAD. FUCK NVM
-#export NVM_DIR="$HOME/.nvm"
-#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 autoload -Uz promptinit
 promptinit
 
-ssh-add -K
-
-
-alias mark="python ~/kvstore.py set \`pwd\` "
-alias list="python ~/kvstore.py list"
-alias del="python ~/kvstore.py del "
-goto() {
-    cd $(python ~/kvstore.py get $1)
-}
-
-
-function my_zen(){
-    echo "Names are important, as they context and intent."
-    echo "Tests are important, as they provide the confidence and security."
-    echo "Simplicity over complexity, our lives are already complicated enough."
-    echo "Clarity is key, thus readability and sparsity."
-    echo "Commit often."
-}
 
 function http_codes() {
     echo "2xx Success"
@@ -484,9 +246,6 @@ function http_codes() {
     echo "511: Network Authentication Required"
 }
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
 function do-speedtest() {
 	while true
 	do
@@ -494,17 +253,3 @@ function do-speedtest() {
 			sleep 300
 	done
 }
-
-
-# Add docker completion support: https://docs.docker.com/compose/completion/#zsh
-fpath=(~/.zsh/completion $fpath)
-autoload -Uz compinit && compinit -i
-
-
-#echo "Commit of the day: " && curl -s whatthecommit.com/index.txt | lolcat 
-#python ~/.isms.py | lolcat
-
-# tabtab source for electron-forge package
-# uninstall by removing these lines or running `tabtab uninstall electron-forge`
-[[ -f /Users/clagraff/src/js/super-rentals/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/clagraff/src/js/super-rentals/node_modules/tabtab/.completions/electron-forge.zsh
-export AWS_SDK_LOAD_CONFIG=1
