@@ -30,21 +30,22 @@ call plug#begin('~/.local/share/nvim/plugged')
     endif
     let g:deoplete#enable_at_startup = 1
 
+    Plug 'cespare/vim-toml'                 " Syntax highlighting for toml files
+    Plug 'digitaltoad/vim-pug'              " Syntax highlighting for .jade files
     Plug 'fatih/vim-go'                     " Enhanced golang support in vim
+    Plug 'jaxbot/semantic-highlight.vim'    " Semantic Highlighting
     Plug 'kchmck/vim-coffee-script'         " Enahcned Coffeescript support in vim
+    Plug 'leafgarland/typescript-vim'       " Typescript support
     Plug 'majutsushi/tagbar'                " Later mapped to <F8>
     Plug 'morhetz/gruvbox'                  " Colorscheme plugin
+    Plug 'posva/vim-vue'                    " Syntax highlighting for .vue files
+    Plug 'quramy/tsuquyomi'                 " Typescript support
     Plug 'scrooloose/nerdtree'              " Later mapped to <Leader-f>
     Plug 'scrooloose/syntastic'             " Great syntax checking
-    Plug 'leafgarland/typescript-vim'       " Typescript support
-    Plug 'quramy/tsuquyomi'                 " Typescript support
+    Plug 'szorfein/fromthehell.vim'
+    Plug 'tpope/vim-ragtag'
     Plug 'vim-airline/vim-airline'          " Status bar & tabline plugin
     Plug 'vim-airline/vim-airline-themes'   " Themes for status bar & tabline plugin
-    Plug 'posva/vim-vue'                    " Syntax highlighting for .vue files
-    Plug 'jaxbot/semantic-highlight.vim'    " Semantic Highlighting
-    Plug 'tpope/vim-ragtag'
-    Plug 'digitaltoad/vim-pug'              " Syntax highlighting for .jade files
-    Plug 'szorfein/fromthehell.vim'
 
 call plug#end()  " Initialize plugin system
 
