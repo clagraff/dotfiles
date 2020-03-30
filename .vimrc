@@ -226,7 +226,7 @@ nnoremap :g/ :g/\v
 nnoremap :g// :g//
 
 " Wrap current word in double-quotes
-nnoremap <silent> " <S-Left>i"<Esc><Right><S-Right>i<Right>"<Esc>
+" nnoremap <silent> " <S-Left>i"<Esc><Right><S-Right>i<Right>"<Esc>
 
 
 " <C-r> will reload vim without closing the current session.
